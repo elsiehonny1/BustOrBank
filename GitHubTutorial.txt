@@ -1,0 +1,26 @@
+Git Hub Tutorial
+
+
+1. Before Coding Type This in a New Terminal
+    Open a Terminal by clicking Terminal at the top Left, and Select New Terminal 
+    Type:
+    git pull
+
+2. Start Coding 
+
+3. Save Changes for Next Commit
+    Open Source Control on the Left 
+    Click Plus Sign Next to File 
+
+4. Commit Changes  
+    In source control, select Commit and write a short description 
+
+5. Push 
+    Select Sync Changes or Push 
+
+
+
+Pull                Updates Your Files 
+Source Control      Prepares it for Commit 
+Commit              Save Changes on your personal Computer 
+Push                Allows Group Members to see your Changes
