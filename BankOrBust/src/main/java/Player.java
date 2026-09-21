@@ -16,16 +16,23 @@ public class Player extends Participant {
         return result;
     }
 
-    public void hit() {
-        this.recieveCard();
+    public boolean hit(String input) {
+        if (input.toLowerCase().equals("hit")) {
+            this.recieveCard();
+            return true;
+        }
+        return false;
     }
-    public void stand() {
 
+    public boolean stand(String input) {
+        return input.toLowerCase().equals("stand");
     }
-    public void double() {
 
+    public boolean double() {
+        
     }
-    public void split() {
+
+    public boolean split() {
 
     }
 }
