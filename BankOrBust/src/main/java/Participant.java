@@ -1,8 +1,8 @@
 public class Participant {
 
-    private final String name;
-    private int cardCount;
-    private Card[] hand;
+    public final String name;
+    public int cardCount;
+    public Card[] hand;
 
     
     private final Card[] possibleCards = {
