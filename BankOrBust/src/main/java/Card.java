@@ -7,7 +7,13 @@ public class Card {
     public Card(String symbol, int value, boolean isHidden) {
         this.symbol = symbol;
         this.value = value;
-        this.isHidden = false;
+        this.isHidden = isHidden;
+    }
+
+    public Card(Card other) {
+        this.symbol = other.symbol;
+        this.value = other.value;
+        this.isHidden = other.isHidden;
     }
 
     public void setValue(int value) {
@@ -16,6 +22,10 @@ public class Card {
 
     public void setIsHidden(boolean isHidden) {
         this.isHidden = isHidden;
+    }
+
+    public boolean isHidden() {
+        return this.isHidden;
     }
 
     public int getValue(Participant participant) {
@@ -31,10 +41,10 @@ public class Card {
     }
     
     public String getSymbol() {
-        if (!this.isHidden) {
-            return this.symbol; 
+        if (this.isHidden) {
+            return "?";
         }
-        return "H";
+        return this.symbol;
     }
     
 }

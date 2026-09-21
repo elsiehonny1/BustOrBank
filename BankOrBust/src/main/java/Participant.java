@@ -30,8 +30,13 @@ public class Participant {
 
     public void receiveCard() {
         int randomIndex = (int)(Math.random() * possibleCards.length);
+        Card newCard = new Card(possibleCards[randomIndex]);
 
-        hand[cardCount] = possibleCards[randomIndex];
+        if (this instanceof Dealer && cardCount == 1) {
+            newCard.setIsHidden(true);
+        }
+
+        hand[cardCount] = newCard;
         cardCount++;
     }
 
@@ -61,19 +66,24 @@ public class Participant {
         return this.getHandValue() == 21 && this.getCardCount() == 2;
     }
     
-    public String printCards(boolean player) {
-        String cards = "";
+    public String printCards() {
+        StringBuilder top = new StringBuilder();
+        StringBuilder rankLine = new StringBuilder();
+        StringBuilder midLine = new StringBuilder();
+        StringBuilder rankLineFlipped = new StringBuilder();
+        StringBuilder bottom = new StringBuilder();
 
         for (int i = 0; i < cardCount; i++) {
+            boolean hidden = hand[i].isHidden();
+            String rank = hand[i].getSymbol();
 
-            if (player == false && i == 1) {
-                cards += "[Hidden] ";
-            }
-            else {
-                cards += hand[i].getSymbol() + " ";
-            }
+            top.append("+-----+ ");
+            rankLine.append(String.format("|%-5s| ", rank));
+            midLine.append(hidden ? "| ??? | " : "|     | ");
+            rankLineFlipped.append(String.format("|%5s| ", rank));
+            bottom.append("+-----+ ");
         }
-        
-        return cards;
+
+        return top + "\n" + rankLine + "\n" + midLine + "\n" + rankLineFlipped + "\n" + bottom;
     }
 }
