@@ -8,3 +8,11 @@
 
 // player.receiveCard();
 // dealer.receiveCard();
+
+import java.util.*;
+
+public class BustOrBank {
+   
+    public Scanner input = new Scanner(System.in);
+
+}
