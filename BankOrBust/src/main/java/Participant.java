@@ -1,11 +1,11 @@
 public class Participant {
 
-    private String name;
+    private final String name;
     private int cardCount;
     private Card[] hand;
 
     
-    private Card[] possibleCards = {
+    private final Card[] possibleCards = {
         new Card("A", 11, false),
         new Card("2", 2, false),
         new Card("3", 3, false),
@@ -21,10 +21,9 @@ public class Participant {
         new Card("K", 10, false)
     };
 
-
     public Participant(String name) {
         this.name = name;
-        this.hand = new Card[22];
+        this.hand = new Card[0];
         this.cardCount = 0;
     }
 
@@ -36,7 +35,10 @@ public class Participant {
             newCard.setIsHidden(true);
         }
 
-        hand[cardCount] = newCard;
+        Card[] newHand = new Card[hand.length + 1];
+        System.arraycopy(hand, 0, newHand, 0, hand.length);
+        newHand[hand.length] = newCard;
+        hand = newHand;
         cardCount++;
     }
 
@@ -83,7 +85,7 @@ public class Participant {
             rankLineFlipped.append(String.format("|%5s| ", rank));
             bottom.append("+-----+ ");
         }
-
+        
         return top + "\n" + rankLine + "\n" + midLine + "\n" + rankLineFlipped + "\n" + bottom;
     }
 }
