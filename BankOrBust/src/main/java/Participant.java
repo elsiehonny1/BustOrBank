@@ -6,19 +6,19 @@ public class Participant {
 
     
     private Card[] possibleCards = {
-        new Card("A", 11),
-        new Card("2", 2),
-        new Card("3", 3),
-        new Card("4", 4),
-        new Card("5", 5),
-        new Card("6", 6),
-        new Card("7", 7),
-        new Card("8", 8),
-        new Card("9", 9),
-        new Card("10", 10),
-        new Card("J", 10),
-        new Card("Q", 10),
-        new Card("K", 10)
+        new Card("A", 11, false),
+        new Card("2", 2, false),
+        new Card("3", 3, false),
+        new Card("4", 4, false),
+        new Card("5", 5, false),
+        new Card("6", 6, false),
+        new Card("7", 7, false),
+        new Card("8", 8, false),
+        new Card("9", 9, false),
+        new Card("10", 10, false),
+        new Card("J", 10, false),
+        new Card("Q", 10, false),
+        new Card("K", 10, false)
     };
 
 
@@ -45,38 +45,20 @@ public class Participant {
 
     public int getHandValue() {
         int total = 0;
-        int aceCount = 0;
 
         for (int i = 0; i < cardCount; i++) {
-            total += hand[i].getValue();
-
-            if (hand[i].getSymbol().equals("A")) {
-                aceCount++;
-            }
-        }
-
-        while (total > 21 && aceCount > 0) {
-            total -= 10;
-            aceCount--;
+            total += hand[i].getValue(this);
         }
 
         return total;
     }
 
     public boolean isBust() {
-        if (this.getHandValue() > 21) {
-            return true;
-        }
-
-        return false;
+        return this.getHandValue() > 21;
     }
 
     public boolean hasBlackJack() {
-        if (this.getHandValue() == 21 && this.getCardCount() == 2) {
-            return true;
-        }
-
-        return false;
+        return this.getHandValue() == 21 && this.getCardCount() == 2;
     }
     
     public String printCards(boolean player) {
