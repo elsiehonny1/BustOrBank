@@ -28,6 +28,12 @@ public class Card {
         return this.isHidden;
     }
 
+    public void setAllHidden(Participant participant, boolean isHidden) {
+        for (Card hand : participant.getHand()) {
+            hand.setIsHidden(isHidden);
+        }
+    }
+
     public int getValue(Participant participant) {
         if (!this.symbol.equals("A")) {
             return this.value;
