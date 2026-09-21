@@ -23,6 +23,6 @@ public class BustOrBank {
     public static final String COLOR_PINK = "\u001B[38;5;206m";
     public static final String COLOR_BROWN = "\u001B[38;5;94m";
 
-    public Scanner input = new Scanner(System.in);
+    public static Scanner input = new Scanner(System.in);
 
 }
