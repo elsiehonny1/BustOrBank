@@ -28,24 +28,24 @@ public class Card {
         return this.isHidden;
     }
 
-    public void setAllHidden(Participant participant, boolean isHidden) {
-        for (Card hand : participant.getHand()) {
-            hand.setIsHidden(isHidden);
+    public static void setAllHidden(Participant participant, boolean isHidden) {
+        for (Card card : participant.getHand()) {
+            card.setIsHidden(isHidden);
         }
     }
 
     public int getValue(Participant participant) {
-        if (!this.symbol.equals("A")) {
-            return this.value;
-        }
-        if (participant.isBust()) {
-            this.setValue(1);      
-            return this.value;
-        }
-        this.setValue(11);
         return this.value;
     }
-    
+
+    public boolean isAce() {
+        return this.symbol.equals("A");
+    }
+
+    public String getRank() {
+        return this.symbol;
+    }
+
     public String getSymbol() {
         if (this.isHidden) {
             return "?";
