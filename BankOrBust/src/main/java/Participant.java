@@ -4,7 +4,6 @@ public class Participant {
     public int cardCount;
     public Card[] hand;
 
-    
     private final Card[] possibleCards = {
         new Card("A", 11, false),
         new Card("2", 2, false),
