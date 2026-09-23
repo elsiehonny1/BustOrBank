@@ -57,10 +57,6 @@ public class Player extends Participant {
         return this.coachEnabled;
     }
 
-    public void setCoachEnabled(boolean value) {
-        this.coachEnabled = value;
-    }
-
     public void toggleCoach() {
         this.coachEnabled = !this.coachEnabled;
     }
