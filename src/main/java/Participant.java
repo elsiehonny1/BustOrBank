@@ -82,6 +82,11 @@ public class Participant {
     }
     
     public void printCards() {
+        // Dealer cards are red, player cards are blue, ranks are always yellow
+        String c = (this instanceof Dealer) ? BustOrBank.COLOR_RED : BustOrBank.COLOR_BLUE;
+        String y = BustOrBank.COLOR_YELLOW;
+        String r = BustOrBank.COLOR_RESET;
+
         String top = "";
         String rankLine = "";
         String midLine = "";
@@ -92,11 +97,11 @@ public class Participant {
             boolean hidden = hand[i].isHidden();
             String rank = hand[i].getSymbol();
 
-            top += "+-----+ ";
-            rankLine += String.format("|%-5s| ", rank);
-            midLine += hidden ? "| ??? | " : "|     | ";
-            rankLineFlipped += String.format("|%5s| ", rank);
-            bottom += "+-----+ ";
+            top += c + "+-----+ " + r;
+            rankLine += c + "|" + y + String.format("%-5s", rank) + c + "| " + r;
+            midLine += c + (hidden ? "|" + y + " ??? " + c + "| " : "|     | ") + r;
+            rankLineFlipped += c + "|" + y + String.format("%5s", rank) + c + "| " + r;
+            bottom += c + "+-----+ " + r;
         }
 
         System.out.println(top);

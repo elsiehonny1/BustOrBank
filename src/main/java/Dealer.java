@@ -1,6 +1,6 @@
 public class Dealer extends Participant {
 
-    public Dealer(String name) {
+    public Dealer() {
         super("Dealer");
     }
 

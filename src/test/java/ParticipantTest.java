@@ -30,7 +30,7 @@ public class ParticipantTest extends student.TestCase {
     }
 
     public void testDealerSecondCardHidden() {
-        Dealer dealer = new Dealer("Dealer");
+        Dealer dealer = new Dealer();
         dealer.receiveCard();
         dealer.receiveCard();
         assertFalse(dealer.getHand()[0].isHidden());
@@ -73,7 +73,8 @@ public class ParticipantTest extends student.TestCase {
     public void testPrintCards() {
         give(new Card("A", 11, false), new Card("5", 5, true));
         part.printCards();
-        String out = systemOut().getHistory();
+        // Strip the ANSI color codes so the card shapes can be compared
+        String out = systemOut().getHistory().replaceAll("\u001B\\[[0-9;]*m", "");
         assertTrue(out.contains("+-----+"));
         assertTrue(out.contains("|A    |"));
         assertTrue(out.contains("|?    |"));

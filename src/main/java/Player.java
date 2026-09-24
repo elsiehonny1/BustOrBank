@@ -81,33 +81,18 @@ public class Player extends Participant {
     }
 
     public void runAction(Card dealerUpCard) {
-        System.out.println("What would you like to do?");
-        System.out.println("--------------------------");
+        System.out.println(BustOrBank.COLOR_YELLOW + "What would you like to do, " + this.name + "?" + BustOrBank.COLOR_RESET);
         String response;
         boolean responseValid = false;
 
         while (!responseValid) {
-            response = BustOrBank.input.nextLine();
+            printOption("1. Hit", canHit());
+            printOption("2. Stand", canStand());
+            printOption("3. Double Down", canDoubleDown());
+            printOption("4. Split", canSplit());
+            System.out.print("> ");
 
-            if (!canHit()) {System.out.println(BustOrBank.COLOR_RED);}
-            else {System.out.println(BustOrBank.COLOR_GREEN);}
-            System.out.print("1. Hit");
-            System.out.println(BustOrBank.COLOR_RESET);
-
-            if (!canStand()) {System.out.println(BustOrBank.COLOR_RED);}
-            else {System.out.println(BustOrBank.COLOR_GREEN);}
-            System.out.print("2. Stand");
-            System.out.println(BustOrBank.COLOR_RESET);
-
-            if (!canDoubleDown()) {System.out.println(BustOrBank.COLOR_RED);}
-            else {System.out.println(BustOrBank.COLOR_GREEN);}
-            System.out.print("3. Double Down");
-            System.out.println(BustOrBank.COLOR_RESET);
-
-            if (!canSplit()) {System.out.println(BustOrBank.COLOR_RED);}
-            else {System.out.println(BustOrBank.COLOR_GREEN);}
-            System.out.print("4. Split");
-            System.out.println(BustOrBank.COLOR_RESET);
+            response = BustOrBank.scanner.nextLine();
 
             if ((response.equals("1") || response.toLowerCase().equals("hit"))
                 && canHit()) {
@@ -137,6 +122,11 @@ public class Player extends Participant {
                 System.out.println(BustOrBank.COLOR_ORANGE + "Invalid Response, Try Again." + BustOrBank.COLOR_RESET);
             }
         }
+    }
+
+    private void printOption(String label, boolean available) {
+        String color = available ? BustOrBank.COLOR_GREEN : BustOrBank.COLOR_RED;
+        System.out.println(color + label + BustOrBank.COLOR_RESET);
     }
 
     public void resetPlayer() {

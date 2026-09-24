@@ -16,6 +16,11 @@ public class PlayerTest extends student.TestCase {
         player = new Player("Alice");
     }
 
+    private void script(String... lines) {
+        setIn(lines);
+        BustOrBank.scanner = in();
+    }
+
     public void testInitialState() {
         assertEquals("Alice", player.name);
         assertEquals(1, player.getNumOfHands());
@@ -168,5 +173,73 @@ public class PlayerTest extends student.TestCase {
         assertEquals(0, player.getCardCount());
         assertFalse(player.getStood());
         assertEquals(1, player.getHands().length);
+    }
+
+    // ---- runAction (scripted input) ----
+
+    public void testRunActionHit() {
+        give(c("2", 2), c("3", 3));
+        script("1");
+        player.runAction(c("6", 6));
+        assertEquals(3, player.getCardCount());
+    }
+
+    public void testRunActionStand() {
+        give(c("10", 10), c("7", 7));
+        script("stand");
+        player.runAction(c("6", 6));
+        assertTrue(player.getStood());
+    }
+
+    public void testRunActionDoubleDown() {
+        give(c("5", 5), c("6", 6));
+        player.placeBet(100);
+        script("3");
+        player.runAction(c("6", 6));
+        assertEquals(200, player.getBet());
+        assertTrue(player.getStood());
+    }
+
+    public void testRunActionSplit() {
+        give(c("8", 8), c("8", 8));
+        player.placeBet(100);
+        script("split");
+        player.runAction(c("6", 6));
+        assertEquals(2, player.getNumOfHands());
+    }
+
+    public void testRunActionRejectsInvalidThenAccepts() {
+        give(c("8", 8), c("9", 9));
+        // "4" (split) is unavailable, "banana" is nonsense, then a valid stand
+        script("4", "banana", "2");
+        player.runAction(c("6", 6));
+        assertTrue(player.getStood());
+        String out = systemOut().getHistory();
+        assertTrue(out.contains("Invalid Response, Try Again."));
+    }
+
+    public void testCoachFeedbackCorrect() {
+        give(c("10", 10), c("7", 7));
+        player.toggleCoach();
+        script("2");
+        player.runAction(c("6", 6));
+        assertTrue(systemOut().getHistory().contains("Coach: Correct!"));
+    }
+
+    public void testCoachFeedbackIncorrect() {
+        give(c("10", 10), c("7", 7));
+        player.toggleCoach();
+        script("1");
+        player.runAction(c("6", 6));
+        String out = systemOut().getHistory();
+        assertTrue(out.contains("Coach: Not quite."));
+        assertTrue(out.contains("Stand"));
+    }
+
+    public void testCoachSilentWhenDisabled() {
+        give(c("10", 10), c("7", 7));
+        script("1");
+        player.runAction(c("6", 6));
+        assertFalse(systemOut().getHistory().contains("Coach:"));
     }
 }
