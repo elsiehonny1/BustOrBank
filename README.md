@@ -74,8 +74,10 @@ javac -d out src/main/java/*.java
 java -cp out BustOrBank
 ```
 
-The game uses ANSI colors, so use a terminal that supports them (VS Code's
-terminal, Windows Terminal, macOS/Linux terminals).
+**The game uses ANSI colors, so use a terminal that supports them (VS Code's
+terminal, Windows Terminal, macOS/Linux terminals). Eclipse's built-in console
+doesn't render ANSI codes by default. Install the "ANSI Escape in Console"
+plugin from the Eclipse Marketplace, or run from an external terminal.**
 
 ## How to play
 
