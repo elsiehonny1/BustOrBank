@@ -36,6 +36,7 @@ public class BustOrBank {
     private int wins;
     private int losses;
     private int pushes;
+    
     public static final String COLOR_RESET = "\u001B[0m";
     public static final String COLOR_RED = "\u001B[31m";
     public static final String COLOR_ORANGE = "\u001B[38;5;214m";
